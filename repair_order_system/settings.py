@@ -160,10 +160,10 @@ USE_TZ = True
 ROOT_URLCONF = 'repair_order_system.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    'http://repairjobsystem-production.up.railway.app'
+    'https://repairjobsystem-production.up.railway.app'
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'http://repairjobsystem-production.up.railway.app'
+    'https://repairjobsystem-production.up.railway.app'
 ]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
