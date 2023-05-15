@@ -1,0 +1,22 @@
+login
+    if Admin:
+        create new job:
+            add customer details: name, number, address
+            get customer complaint
+            get error code shown on the product
+            (optional: add pop, and store name)
+            create the job
+
+
+        .... ability to edit other fields
+
+        add resolution
+        close the job
+
+    if Technician:
+        query job:
+            job number, customer name and surname,
+        edit the job:
+            technician comments, fault code, images, etc:
+
+            

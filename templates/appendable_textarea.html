@@ -1,0 +1,16 @@
+{% extends "django/forms/widgets/textarea.html" %}
+
+{% block textarea %}
+    {{ widget }}
+    <button type="button" onclick="appendText()">Add note</button>
+    <script>
+        function appendText() {
+            var textarea = document.getElementById('{{ widget.id }}');
+            var note = 'New note (' + new Date().toLocaleString() + ')';
+            if (textarea.value.length > 0) {
+                note = '\\n' + note;
+            }
+            textarea.value += note;
+        }
+    </script>
+{% endblock %}

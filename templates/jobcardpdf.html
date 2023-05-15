@@ -1,0 +1,123 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Card - {{ job_card.job_number }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #333;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            text-decoration: underline;
+        }
+        h2 {
+            font-size: 24px;
+            text-decoration: underline;
+        }
+        .section {
+            border: 1px solid #333;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .inline {
+            display: inline-block;
+            vertical-align: top;
+            width: 49%;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tevo Large Appliances Maintenance</h1>
+    <div class="section">
+        <h2>Job Information</h2>
+        <p>Job number: {{ job_card.job_number }}</p>
+        <p>Job status: {{ job_card.job_status }}</p>
+        <p>Resolution: {{ job_card.resolution }}</p>
+    </div>
+    <div class="section">
+        <h2>Query Information</h2>
+        <p>Product name: {{ job_card.product_name }}</p>
+        <p>Complaint or query: {{ job_card.complaint_or_query }}</p>
+        <p>Serial number: {{ job_card.serial_number }}</p>
+        <p>Error code: {{ job_card.error_code }}</p>
+    </div>
+    <div class="section">
+        <h2>Warranty Information</h2>
+        <p>Store name: {{ job_card.store_name }}</p>
+        <p>Purchase date: {{ job_card.date_of_purchase }}</p>
+        <p>Date of query: {{ job_card.date_of_query }}</p>
+    </div>
+    <div class="section">
+        <h2>Technical Assessment</h2>
+        <p>Technician assessment: {{ job_card.technician_assessment }}</p>
+        <p>Fault code: {{ job_card.fault_code }}</p>
+        <p>Additional notes: {{ job_card.additional_notes }}</p>
+    </div>
+    <div class="section">
+        <h2>Supportive Figures</h2>
+        <div class="inline">
+            <p><strong>POP Image:</strong></p>
+            {% for image in images %}
+                {% if image.pop_image %}
+                    <img src="{{ image.pop_image|image_to_base64 }}" width="100">
+                {% else %}
+                    <p>No POP image available.</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="inline">
+            <p><strong>Images of product before assessment:</strong></p>
+            {% for image in images %}
+                {% if image.before_assessment_image1 %}
+                    <img src="{{ image.before_assessment_image1.url }}" alt="Before Assessment 1" width="100">
+                {% endif %}
+                {% if image.before_assessment_image2 %}
+                    <img src="{{ image.before_assessment_image2.url }}" alt="Before Assessment 2" width="100">
+                {% endif %}
+                {% if image.before_assessment_image3 %}
+                    <img src="{{ image.before_assessment_image3.url }}" alt="Before Assessment 3" width="100">
+                {% endif %}
+        {% endfor %}
+        </div>
+
+    <div>
+            <p><strong>Images of product after assessment:</strong></p>
+            {% for image in images %}
+                {% if image.after_assessment_image1 %}
+                    <img src="{{ image.after_assessment_image1.url }}" alt="After Assessment 1" width="100">
+                {% endif %}
+                {% if image.after_assessment_image2 %}
+                    <img src="{{ image.after_assessment_image2.url }}" alt="After Assessment 2" width="100">
+                {% endif %}
+                {% if image.after_assessment_image3 %}
+                    <img src="{{ image.after_assessment_image3.url }}" alt="After Assessment 3" width="100">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <p><strong>Assessment Environment Image:</strong></p>
+            {% for image in images %}
+                {% if image.assessment_environment_image %}
+                    <img src="{{ image.assessment_environment_image.url }}" alt="Assessment Environment" width="100">
+                {% else %}
+                    <p>No assessment environment image available.</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+
+
