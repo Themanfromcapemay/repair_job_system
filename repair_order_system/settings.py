@@ -80,6 +80,7 @@ ROOT_URLCONF = 'repair_order_system.urls'
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 TEMPLATES = [
     {
@@ -159,10 +160,10 @@ USE_TZ = True
 ROOT_URLCONF = 'repair_order_system.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    'http://192.168.193.158:8000'
+    '*'
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'http://192.168.193.158:8000'
+    '*'
 ]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
