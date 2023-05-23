@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-&$__mf!csw^@ifqdoy0(19ivfc%wds=yomvet53&-r@#14-9+l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://35.226.213.165/']
 
 
 # Application definition
@@ -117,11 +117,11 @@ AUTH_USER_MODEL = 'authentication.CustomUser'  # Replace 'your_app_name' with yo
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'xxPNcERzFYL3poio6Kas',
-        'HOST': 'containers-us-west-38.railway.app',
-        'PORT': '7811',
+        'NAME': 'repairsdb',
+        'USER': 'bchichava',
+        'PASSWORD': '4321',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

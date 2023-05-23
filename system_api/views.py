@@ -19,9 +19,41 @@ from .models import JobCard, Images
 from .serializers import JobCardSerializer, QueriedJobCardSerializer, ImagesSerializer
 
 
+@api_view(['GET'])
 def export_job_cards(request):
-    job_cards = JobCard.objects.all().values()
-    df = pd.DataFrame.from_records(job_cards)
+    job_cards = JobCard.objects.select_related('customer').all()
+
+    # Manually construct a dictionary for each job card that includes the customer fields
+    data = []
+    for job_card in job_cards:
+        jc_dict = {
+            'job_number': job_card.job_number,
+            'complaint_or_query': job_card.complaint_or_query,
+            'error_code': job_card.error_code,
+            'date_created': job_card.date_created,
+            'date_of_query': job_card.date_of_query,
+            'date_of_purchase': job_card.date_of_purchase,
+            'store_name': job_card.store_name,
+            'product_name': job_card.product_name,
+            'serial_number': job_card.serial_number,
+            'date_of_technician_assessment': job_card.date_of_technician_assessment,
+            'technician_assessment': job_card.technician_assessment,
+            'additional_notes': job_card.additional_notes,
+            'fault_code': job_card.fault_code,
+            'job_status': job_card.job_status,
+            'resolution': job_card.resolution,
+            'last_modified_by': job_card.last_modified_by,
+            'last_modified_at': job_card.last_modified_at,
+            'customer_name': job_card.customer.name,
+            'customer_email': job_card.customer.email,
+            'customer_contact_number': job_card.customer.contact_number,
+            'customer_alt_contact_number': job_card.customer.alt_contact_number,
+            'customer_address': job_card.customer.address,
+        }
+
+        data.append(jc_dict)
+
+    df = pd.DataFrame.from_records(data)
 
     # Convert all entries to strings
     df = df.astype(str)
@@ -37,7 +69,7 @@ def export_job_cards(request):
     virtual_file.seek(0)
     response = FileResponse(
         virtual_file, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename=job_cards.xlsx'
+    response['Content-Disposition'] = 'attachment; filename=all_job_cards.xlsx'
     return response
 
 
